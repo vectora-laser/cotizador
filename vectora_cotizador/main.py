@@ -7,6 +7,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from config import load_config
+from config import CONFIG
 from calculator import QuoteInput, calculate_quote
 
 
@@ -58,12 +59,15 @@ class VectoraCotizadorApp:
         self.coverage_var = tk.StringVar()
 
         self._add_combo(form, "Material", self.material_var, list(self.config["materiales"].keys()), 0)
+        self._add_combo(form, "Material", self.material_var, list(CONFIG["materiales"].keys()), 0)
         self._add_combo(form, "Tipo de trabajo", self.work_type_var, self.WORK_TYPES, 1)
         self._add_entry(form, "Cantidad", self.quantity_var, 2)
         self._add_entry(form, "Ancho (cm)", self.width_var, 3)
         self._add_entry(form, "Alto (cm)", self.height_var, 4)
         self._add_combo(form, "Complejidad de corte", self.complexity_var, list(self.config["factores_complejidad"].keys()), 5)
         self._add_combo(form, "Cobertura de grabado", self.coverage_var, list(self.config["factores_cobertura"].keys()), 6)
+        self._add_combo(form, "Complejidad de corte", self.complexity_var, list(CONFIG["factores_complejidad"].keys()), 5)
+        self._add_combo(form, "Cobertura de grabado", self.coverage_var, list(CONFIG["factores_cobertura"].keys()), 6)
 
         actions = ttk.Frame(container)
         actions.pack(fill="x", pady=(18, 10))
@@ -131,6 +135,7 @@ class VectoraCotizadorApp:
                 raise ValueError("Ancho y alto deben ser mayores a cero.")
 
             result = calculate_quote(quote_input, self.config)
+            result = calculate_quote(quote_input, CONFIG)
             self._show_result(result)
 
         except ValueError as error:

@@ -51,6 +51,7 @@ def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
     tarifa_corte = material_cfg["tarifa_corte"]
     tarifa_grabado = material_cfg["tarifa_grabado"]
 
+    precio_cm2 = config["materiales"][data.material]["precio_cm2"]
     factor_complejidad = config["factores_complejidad"][data.cut_complexity]
     factor_cobertura = config["factores_cobertura"][data.engraving_coverage]
 
@@ -65,6 +66,7 @@ def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
             area
             * factor_complejidad
             * tarifa_corte
+            * config["tarifa_corte"]
             * data.quantity
         )
 
@@ -74,6 +76,7 @@ def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
             area
             * factor_cobertura
             * tarifa_grabado
+            * config["tarifa_grabado"]
             * data.quantity
         )
 

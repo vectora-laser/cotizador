@@ -14,6 +14,7 @@ python main.py
 - `calculator.py`: lógica de cálculo desacoplada de la UI.
 - `config.py`: carga, guardado y saneamiento de configuración.
 - `config.json`: parámetros editables sin tocar código.
+- `config.py`: parámetros configurables de negocio.
 
 ## Fórmula implementada
 
@@ -33,6 +34,14 @@ python main.py
 - `tarifa_grabado`
 
 Además se mantienen `load_config()` y `save_config()` en `config.py` para la futura pantalla de configuración en UI.
+- Costo corte: `area * factor_complejidad * tarifa_corte * cantidad` (si aplica)
+- Costo grabado: `area * factor_cobertura * tarifa_grabado * cantidad` (si aplica)
+- Subtotal: `material + corte + grabado + costo_fijo`
+- Precio final: `subtotal * margen`
+
+## Ajustes de negocio rápidos
+
+Todos los importes y factores están en `CONFIG` dentro de `config.py`.
 
 ## Preparado para evolución
 
@@ -42,3 +51,17 @@ El código deja aislados los componentes para agregar más adelante:
 - exportación a PDF
 - pantalla de configuración persistente
 - API para migración a web/PWA
+- API para migración a web/PWA
+
+## Recomendación implementable (siguiente paso)
+
+Tu sugerencia es excelente: agregar una pantalla de **Configuración** para editar precios y factores sin tocar código.
+
+Propuesta técnica para la próxima iteración:
+
+1. Persistir `CONFIG` en un archivo `settings.json`.
+2. Cargar configuración al iniciar la app.
+3. Crear ventana de configuración con validación y botón Guardar.
+4. Reusar `calculator.py` sin cambios.
+
+Con eso el negocio puede ajustar precios en minutos.
