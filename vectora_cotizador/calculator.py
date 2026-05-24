@@ -45,6 +45,12 @@ def _includes_engraving(work_type: str) -> bool:
 def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
     """Calcula un presupuesto con base en la configuración indicada."""
 
+    material_cfg = config["materiales"][data.material]
+    precio_cm2 = material_cfg["precio_cm2"]
+    # Tarifas por material: reflejan tiempo aproximado real de máquina.
+    tarifa_corte = material_cfg["tarifa_corte"]
+    tarifa_grabado = material_cfg["tarifa_grabado"]
+
     precio_cm2 = config["materiales"][data.material]["precio_cm2"]
     factor_complejidad = config["factores_complejidad"][data.cut_complexity]
     factor_cobertura = config["factores_cobertura"][data.engraving_coverage]
@@ -59,6 +65,7 @@ def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
         cut_cost = (
             area
             * factor_complejidad
+            * tarifa_corte
             * config["tarifa_corte"]
             * data.quantity
         )
@@ -68,6 +75,7 @@ def calculate_quote(data: QuoteInput, config: Dict[str, Any]) -> QuoteResult:
         engraving_cost = (
             area
             * factor_cobertura
+            * tarifa_grabado
             * config["tarifa_grabado"]
             * data.quantity
         )

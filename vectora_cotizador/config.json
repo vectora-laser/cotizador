@@ -1,0 +1,31 @@
+{
+  "materiales": {
+    "MDF 3 mm": {
+      "precio_cm2": 1.5,
+      "tarifa_corte": 2.0,
+      "tarifa_grabado": 1.2
+    },
+    "MDF 5 mm": {
+      "precio_cm2": 2.3,
+      "tarifa_corte": 3.5,
+      "tarifa_grabado": 1.4
+    },
+    "PU": {
+      "precio_cm2": 1.8,
+      "tarifa_corte": 1.4,
+      "tarifa_grabado": 1.8
+    }
+  },
+  "factores_complejidad": {
+    "Baja": 1.0,
+    "Media": 1.5,
+    "Alta": 2.5
+  },
+  "factores_cobertura": {
+    "Baja": 0.2,
+    "Media": 0.5,
+    "Alta": 0.9
+  },
+  "costo_fijo": 500.0,
+  "margen": 1.5
+}
